@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     data() {
       return {
@@ -36,7 +35,7 @@
           type: 'error'
         });
         // 将用户输入的信息发送到服务器
-        axios.post('http://litc.pro:9999/v1/users/login', {
+        this.$http.post('http://litc.pro:9999/v1/users/login', {
             username,
             password
         })

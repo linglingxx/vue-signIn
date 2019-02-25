@@ -39,6 +39,10 @@
                 </el-menu>
             </el-col>
             <el-col :span="20">
+              <div class="zx">
+                <p>昵称: {{ userInfo.nickname }}</p>
+                <el-button @click="signOut" type="danger">退出登录</el-button>
+              </div>
                 <router-view></router-view>
             </el-col>
         </el-row>
@@ -47,6 +51,11 @@
 
 <script>
   export default {
+    data() {
+      return {
+        userInfo: JSON.parse(localStorage.getItem('userInfo') || '')
+      }
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
@@ -66,6 +75,15 @@
             //   this.$router.push('/home/othreceiver')
             //   break;
         }
+      },
+      signOut() {
+        localStorage.removeItem('token')
+        localStorage.removeItem('userInfo')
+        this.$message({
+          type: 'success',
+          message: '退出成功!'
+        })
+        this.$router.push('/')
       }
     }
   }
@@ -75,6 +93,10 @@
 .home-container {
     .el-menu {
         border: none;
+    }
+    .zx {
+      display: flex;
+      align-items: center;
     }
 }
 </style>
